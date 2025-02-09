@@ -1,0 +1,10 @@
+{
+    "domain": "ovms",
+    "name": "OVMS",
+    "version": "0.0.1",
+    "documentation": "https://www.example.com/documentation",
+    "dependencies": [],
+    "codeowners": ["@andlo"],
+    "requirements": ["paho-mqtt"]
+  }
+  
