@@ -1,10 +1,25 @@
 {
-    "domain": "ovms",
-    "name": "OVMS",
-    "version": "0.0.1",
-    "documentation": "https://www.example.com/documentation",
-    "dependencies": [],
-    "codeowners": ["@andlo"],
-    "requirements": ["paho-mqtt"]
+    "domain": "ovms-hacs",
+    "name": "OVMS-HACS",
+    "after_dependencies": [
+      "paho-mqtt", ## Just example
+      "node-red" ## Just example
+    ],
+    "codeowners": [
+      "@andlo"
+    ],
+    "config_flow": true,
+    "dependencies": [
+      "paho-mqtt"
+    ],
+
+    "documentation": "https://github.com/andlo/OVMS-Homeasstsiant-MQTT",
+    "integration_type": "hub", #" Not sure about this
+    "iot_class": "calculated",
+    "issue_tracker": "https://github.com/andlo/OVMS-Homeasstsiant-MQTT/issues",
+    "requirements": [
+      "paho-mqtt"
+    ],
+    "version": "0.0.1"
   }
   
