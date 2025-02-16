@@ -2,8 +2,8 @@
     "domain": "ovms-hacs",
     "name": "OVMS-HACS",
     "after_dependencies": [
-      "paho-mqtt", ## Just example
-      "node-red" ## Just example
+      "paho-mqtt",
+      "node-red"
     ],
     "codeowners": [
       "@andlo"
@@ -14,7 +14,7 @@
     ],
 
     "documentation": "https://github.com/andlo/OVMS-Homeasstsiant-MQTT",
-    "integration_type": "hub", #" Not sure about this
+    "integration_type": "hub",
     "iot_class": "calculated",
     "issue_tracker": "https://github.com/andlo/OVMS-Homeasstsiant-MQTT/issues",
     "requirements": [
