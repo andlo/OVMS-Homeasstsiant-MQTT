@@ -1,0 +1,7 @@
+{
+  "name": "OVMS-HACS",
+  "homeassistant": "2025.2.1",
+  "zip_release": true,
+  "filename": "ovms-hacs.zip",
+  "render_readme": true
+}
