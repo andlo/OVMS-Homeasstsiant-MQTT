@@ -1,6 +1,6 @@
 {
     "domain": "ovms-hacs",
-    "name": "OVMS-HACS",
+    "name": "OVMS HACS",
     "after_dependencies": [
       "paho-mqtt",
       "node-red"
