@@ -1,5 +1,5 @@
 # OVMS HACS
-![logo]([https://github.com/username/repository/blob/master/img/octocat.png](https://github.com/andlo/OVMS-Homeasstsiant-MQTT/blob/main/icon.png))
+![OVMS logo](https://github.com/andlo/OVMS-Homeasstsiant-MQTT/blob/ff29e18bb04399bbfaa714caac901e02eb902dd1/icon.png)
 
 # Purpose
 
