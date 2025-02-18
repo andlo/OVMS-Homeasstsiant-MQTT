@@ -2,6 +2,8 @@ name: Format Python Code
 on: push
 jobs:
   python-code-format:
+    permissions:
+      contents: write
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
