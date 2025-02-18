@@ -1,4 +1,0 @@
-name: Allow Github Actions
-on: workflow_dispatch
-permissions:
-  pull-requests: write
