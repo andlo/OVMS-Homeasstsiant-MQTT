@@ -1,0 +1,4 @@
+name: Allow Github Actions
+on: workflow_dispatch
+permissions:
+  contents: write
