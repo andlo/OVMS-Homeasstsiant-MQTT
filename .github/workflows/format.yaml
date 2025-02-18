@@ -1,5 +1,5 @@
 name: Format Python Code
-on: pull_request
+on: push
 jobs:
   python-code-format:
     runs-on: ubuntu-latest
@@ -26,3 +26,4 @@ jobs:
           body: This is an auto-generated PR with fixes.
           labels: automated pr
           branch: python-code-format-patches
+          base: main  # Add this line to specify the base branch
