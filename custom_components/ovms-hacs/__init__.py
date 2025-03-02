@@ -1,6 +1,7 @@
-import paho.mqtt.client as mqtt
 import json
 import time
+
+import paho.mqtt.client as mqtt
 
 # MQTT broker details
 # for now needs to be filed out here. Should be in configflow.
@@ -13,13 +14,26 @@ PASSWORD = "XXXX"
 # Base topic for Home Assistant discovery
 DISCOVERY_TOPIC = "homeassistant/sensor"
 
+
 # Function to delete autodiscovery message
 def delete_discovery(sensor_id):
     topic = f"{DISCOVERY_TOPIC}/{sensor_id}/config"
     client.publish(topic, "", qos=1, retain=True)
 
+
 # Function to publish autodiscovery message
-def publish_discovery(sensor_id, name, unique_id, state_topic, unit_of_measurement, device_class, icon, availability_topic, payload_available, payload_not_available):
+def publish_discovery(
+    sensor_id,
+    name,
+    unique_id,
+    state_topic,
+    unit_of_measurement,
+    device_class,
+    icon,
+    availability_topic,
+    payload_available,
+    payload_not_available,
+):
     payload = {
         "name": name,
         "unique_id": unique_id,
@@ -34,16 +48,18 @@ def publish_discovery(sensor_id, name, unique_id, state_topic, unit_of_measureme
             "identifiers": ["ovms_device"],
             "name": "OVMS Device",
             "model": "OVMS",
-            "manufacturer": "Open Vehicle Monitoring System"
-        }
+            "manufacturer": "Open Vehicle Monitoring System",
+        },
     }
     topic = f"{DISCOVERY_TOPIC}/{sensor_id}/config"
     client.publish(topic, json.dumps(payload), qos=1, retain=True)
+
 
 # MQTT on_connect callback
 def on_connect(client, userdata, flags, rc):
     print(f"Connected with result code {rc}")
     client.subscribe("ovms/e-up/#")
+
 
 # Determine device class and icon based on topic
 def determine_device_class_and_icon(topic):
@@ -56,23 +72,49 @@ def determine_device_class_and_icon(topic):
     else:
         return "None", "mdi:map-marker"
 
+
 # MQTT on_message callback
 def on_message(client, userdata, msg):
     topic = msg.topic
     sensor_id = topic.replace("/", "_")
-    name = f"ovms-e-up-{topic}-"  + topic.split("/")[-1].replace("_", " ").title()
+    name = f"ovms-e-up-{topic}-" + \
+        topic.split("/")[-1].replace("_", " ").title()
     unique_id = f"ovms_{topic}_{sensor_id}"
-    unit_of_measurement = "%" if "soc" in topic or "soh" in topic else ("V" if "12v" in topic else ("km" if "range" in topic or "odometer" in topic else ""))
+    unit_of_measurement = (
+        "%"
+        if "soc" in topic or "soh" in topic
+        else (
+            "V"
+            if "12v" in topic
+            else ("km" if "range" in topic or "odometer" in topic else "")
+        )
+    )
     device_class, icon = determine_device_class_and_icon(topic)
-    availability_topic = "ovms/e-up/metric/s/v3/connected" if "e-up" in topic else "ovms/w-eup/metric/s/v3/connected"
+    availability_topic = (
+        "ovms/e-up/metric/s/v3/connected"
+        if "e-up" in topic
+        else "ovms/w-eup/metric/s/v3/connected"
+    )
     payload_available = "yes"
     payload_not_available = "no"
 
     # Delete existing discovery topic
-    #delete_discovery(sensor_id)
+    # delete_discovery(sensor_id)
 
     # Publish new discovery message
-    publish_discovery(sensor_id, name, unique_id, topic, unit_of_measurement, device_class, icon, availability_topic, payload_available, payload_not_available)
+    publish_discovery(
+        sensor_id,
+        name,
+        unique_id,
+        topic,
+        unit_of_measurement,
+        device_class,
+        icon,
+        availability_topic,
+        payload_available,
+        payload_not_available,
+    )
+
 
 # Initialize MQTT client
 client = mqtt.Client()
